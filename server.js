@@ -1,0 +1,49 @@
+import express from 'express';
+import graphqlHTTP from 'express-graphql';
+import path from 'path';
+import webpack from 'webpack';
+import WebPackDevServer from 'webpack-dev-server';
+import { schema } from './data/schema'; 
+import { employeesLoader, assetsLoader , employersLoader} from './data/data-loaders.js'
+
+const APP_PORT = 3300;
+const GRAPHQL_PORT = 8080;
+
+// GraphQL server
+const graphQLServer = express();
+graphQLServer.use('/graphQl', graphqlHTTP({
+    schema: schema,
+    pretty: true,
+    graphiql: true, //process.env.NODE_ENV === 'development' to enable only in the dev environment
+    context: {
+        employeesLoader,
+        assetsLoader,
+        employersLoader
+    }
+}));
+graphQLServer.listen(GRAPHQL_PORT, () => console.log(`GraphQL server on localhost:${GRAPHQL_PORT}`));
+
+// react app setup with webpack
+const compiler = webpack({
+    entry:['whatwg-fetch', path.resolve(__dirname, 'src', 'index.js')],
+    module: {
+        loaders: [
+            {
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                test: /\.js$/,
+            },
+        ],
+    },
+    output: {filename: 'App.js', path: '/'}
+});
+
+const app = new WebPackDevServer(compiler, {
+    contentBase: '/public/',
+    proxy: {'/graphql': `http://localhost:${GRAPHQL_PORT}/graphql`},
+    publicPath: '/src/',
+    stats: {colors: true},
+});
+
+app.use('/', express.static(path.resolve(__dirname, 'public')));
+app.listen(APP_PORT, () => console.log(`App is now running on localhost:${APP_PORT}`));

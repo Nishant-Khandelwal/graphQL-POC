@@ -1,0 +1,159 @@
+{
+  "employees": [
+    {
+      "employeeId": 121,
+      "id": "121",
+      "firstName": "Harrell",
+      "lastName": "Browning",
+      "gender": "male",
+      "email": "harrellbrowning@barkarama.com",
+      "supervisorId": 234,
+      "assetsAllocated": [
+        "AST123"
+      ],
+      "supervisees": [
+        123
+      ],
+      "employer": "EMPL01"
+    },
+    {
+      "employeeId": 122,
+      "id": "122",
+      "firstName": "Penelope",
+      "lastName": "Thornton",
+      "gender": "female",
+      "email": "penelopethornton@asc.com",
+      "supervisorId": 124,
+      "assetsAllocated": [
+        "AST234"
+      ],
+      "supervisees": [],
+      "employer": "EMPL01"
+    },
+    {
+      "employeeId": 123,
+      "id": "123",
+      "firstName": "Sutton",
+      "lastName": "Daniel",
+      "gender": "male",
+      "email": "suttondaniel@sasa.com",
+      "supervisorId": 121,
+      "assetsAllocated": [
+        "AST345"
+      ],
+      "supervisees": [],
+      "employer": "EMPL01"
+    },
+    {
+      "employeeId": 124,
+      "id": "124",
+      "firstName": "Lenore",
+      "lastName": "Henson",
+      "gender": "female",
+      "email": "lenorehenson@rer.com",
+      "supervisorId": 234,
+      "assetsAllocated": [
+        "AST456"
+      ],
+      "supervisees": [
+        122
+      ],
+      "employer": "EMPL01"
+    },
+    {
+      "employeeId": 234,
+      "id": "234",
+      "firstName": "alice",
+      "lastName": "robert",
+      "gender": "male",
+      "email": "alice@gfgfg.com",
+      "supervisorId": 234,
+      "assetsAllocated": [
+        "AST567",
+        "AST678"
+      ],
+      "supervisees": [
+        121,
+        124
+      ],
+      "employer": "EMPL01"
+    },
+    {
+      "firstName": "brita",
+      "lastName": "more",
+      "gender": "female",
+      "email": "brain@andrew.gmail.com",
+      "supervisorId": 123,
+      "employeeId": 999,
+      "id": "OdIehNR"
+    },
+    {
+      "firstName": "new user",
+      "lastName": "last name",
+      "supervisorId": "121",
+      "employeeId": 111,
+      "id": "q93unFo"
+    }
+  ],
+  "employers": [
+    {
+      "employerId": "EMPL01",
+      "employerName": "CompanyXYZ",
+      "division": "Tech",
+      "employerHeadOffice": "France",
+      "employees": [
+        121,
+        122,
+        123,
+        124,
+        234
+      ]
+    },
+    {
+      "employerId": "EMPL02",
+      "employerName": "CompanyXYZ",
+      "division": "Operations",
+      "employerHeadOffice": "Germany",
+      "employees": []
+    },
+    {
+      "employerId": "EMPL03",
+      "employerName": "CompanyXYZ",
+      "division": "Infra",
+      "employerHeadOffice": "London",
+      "employees": []
+    }
+  ],
+  "assets": [
+    {
+      "assetId": "AST123",
+      "assetType": "laptop",
+      "issuedTo": 121
+    },
+    {
+      "assetId": "AST234",
+      "assetType": "laptop",
+      "issuedTo": 122
+    },
+    {
+      "assetId": "AST345",
+      "assetType": "laptop",
+      "issuedTo": 123
+    },
+    {
+      "assetId": "AST456",
+      "assetType": "laptop",
+      "issuedTo": 124
+    },
+    {
+      "assetId": "AST567",
+      "assetType": "laptop",
+      "issuedTo": 234
+    },
+    {
+      "assetId": "AST678",
+      "assetType": "test device",
+      "issuedTo": 234
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+query{
+  employeeList {
+    id,
+    employees {
+      edges {
+        node {
+          id,
+        	firstName,
+          employer {
+            id,
+            employerName
+          },
+          supervisor{
+            firstName,
+            employer {
+              id,
+              employerName,
+              employees {
+                edges {
+                  node {
+                    id,
+                    email
+                  }
+                }
+              }
+            },
+            id
+          },
+          assetsAllocated{
+          	edges{
+              node{
+                id,
+                assetId,
+                assetType
+              }
+            }
+          }
+        }
+      }
+    }
+    }
+}

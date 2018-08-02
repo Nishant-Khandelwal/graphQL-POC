@@ -1,0 +1,149 @@
+input addEmployeeDetailsInput {
+  employeeId: Int!
+  firstName: String
+  lastName: String
+  gender: String
+  email: String
+  supervisorId: ID!
+  clientMutationId: String
+}
+
+type addEmployeeDetailsPayload {
+  employee: Employee
+  clientMutationId: String
+}
+
+# asset details
+type Asset {
+  # The ID of an object
+  id: ID!
+  assetId: String
+  assetType: String
+
+  # Details of Employee for this asset
+  issuedTo: Employee
+}
+
+# A connection to a list of items.
+type AssetConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [AssetEdge]
+}
+
+# An edge in a connection.
+type AssetEdge {
+  # The item at the end of the edge
+  node: Asset
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type Employee {
+  # The ID of an object
+  id: ID!
+  firstName: String
+  lastName: String
+  gender: String
+
+  # Details of SuperVisor
+  supervisor: Employee
+
+  # List of Allocated Assets
+  assetsAllocated(after: String, first: Int, before: String, last: Int): AssetConnection
+
+  # Details of the employer
+  employer: Employer
+  email: String
+}
+
+# A connection to a list of items.
+type EmployeeConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [EmployeeEdge]
+}
+
+# An edge in a connection.
+type EmployeeEdge {
+  # The item at the end of the edge
+  node: Employee
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# employer details
+type Employer {
+  # The ID of an object
+  id: ID!
+  employerId: String
+  employerName: String
+  division: String
+  employerHeadOffice: String
+
+  # List of Employees
+  employees(after: String, first: Int, before: String, last: Int): EmployeeConnection
+}
+
+input getEmployeeDetailsInput {
+  employeeId: Int!
+  clientMutationId: String
+}
+
+type getEmployeeDetailsPayload {
+  employee: Employee
+  clientMutationId: String
+}
+
+type Mutation {
+  getEmployeeDetails(input: getEmployeeDetailsInput!): getEmployeeDetailsPayload
+  addEmployeeDetails(input: addEmployeeDetailsInput!): addEmployeeDetailsPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Query {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+  employeeList: Viewer
+  employerList: [Employer]
+  assetsList: [Asset]
+  employeeDetail(employeeId: Int!): Employee
+}
+
+# List of Employees
+type Viewer implements Node {
+  # The ID of an object
+  id: ID!
+
+  # List of Employees
+  employees(after: String, first: Int, before: String, last: Int): EmployeeConnection
+}
